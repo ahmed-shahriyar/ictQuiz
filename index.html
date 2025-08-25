@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML কুইজ - ২৫ প্রশ্ন</title>
+  <style>
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad390, #6a82fb, #fc5c7d);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+    @keyframes gradientBG {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .card {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    h2 { text-align: center; color: #6a1b9a; }
+    .question {
+      margin: 18px 0;
+      padding: 16px;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      background: white;
+      background-clip: padding-box;
+      position: relative;
+    }
+    .question:before {
+      content: "";
+      position: absolute;
+      top: -3px; left: -3px; right: -3px; bottom: -3px;
+      z-index: -1;
+      border-radius: 12px;
+      background: linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);
+      background-size: 300% 300%;
+      animation: borderAnim 5s linear infinite;
+    }
+    @keyframes borderAnim {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .options { display: grid; gap: 8px; margin-top: 10px }
+    .opt {
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex; align-items: center;
+    }
+    .opt input { margin-right: 10px; transform: scale(1.2); }
+    .opt:hover {
+      background: linear-gradient(90deg,#ff9a9e,#fad390,#6a82fb,#fc5c7d);
+      color: white;
+      border-color: transparent;
+    }
+    .correct { background: #c8f7c5 !important; border-color:#27ae60 !important; color:#065f46 }
+    .incorrect { background: #f7c5c5 !important; border-color:#e74c3c !important; color:#7f1d1d }
+    button {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(90deg,#fc5c7d,#6a82fb,#45f2b3);
+      background-size: 200% 200%;
+      color: white;
+      transition: 0.3s;
+      margin-top: 14px;
+      margin-right: 10px;
+    }
+    button:hover { background-position: right center; }
+    #result {
+      font-weight: 700; font-size: 20px; margin-top: 20px; text-align:center;
+      color:#111;
+    }
+    /* Mobile friendly */
+    @media(max-width:600px){
+      .card{padding:12px}
+      .opt{font-size:14px;padding:10px}
+      button{width:100%;margin-bottom:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🌈 HTML কুইজ (২৫ প্রশ্ন)</h2>
+    <form id="quizForm">
+      <div id="questions"></div>
+      <button type="button" id="submitBtn">✅ জমা দিন</button>
+      <button type="reset" id="resetBtn">🔄 রিসেট</button>
+    </form>
+    <p id="result"></p>
+  </div>
+
+  <script>
+  window.onload = function() {
+    const quizData = [
+  {q:"HTML এ &lt;p&gt; ট্যাগের মূল কাজ কী?", opts:["ছবি দেখানো","অনুচ্ছেদ তৈরি করা","শিরোনাম তৈরি করা","টেবিল বানানো"], ans:1},
+  {q:"&lt;b&gt; ট্যাগ ব্যবহার করলে টেক্সট কেমন হয়?", opts:["আন্ডারলাইন","ইটালিক","বোল্ড","স্ট্রাইক"], ans:2},
+  {q:"&lt;del&gt; ট্যাগ সাধারণত কোন কাজের জন্য ব্যবহৃত হয়?", opts:["টেক্সট মুছে ফেলা বোঝাতে","বোল্ড করার জন্য","লিস্ট তৈরির জন্য","লিঙ্ক তৈরির জন্য"], ans:0},
+  {q:"&lt;sub&gt; ট্যাগ দিয়ে কী বোঝানো হয়?", opts:["উপরের লেখা","নিচের লেখা (subscript)","মোটা লেখা","ইটালিক লেখা"], ans:1},
+  {q:"&lt;sup&gt; ট্যাগ ব্যবহার করলে টেক্সট কোথায় যায়?", opts:["নিচে","বামে","উপরে (superscript)","মাঝখানে"], ans:2},
+  {q:"&lt;ul&gt; ট্যাগ কোন ধরণের লিস্ট তৈরি করে?", opts:["ক্রমিক লিস্ট","অক্রমিক লিস্ট","টেবিল","হাইপারলিঙ্ক"], ans:1},
+  {q:"&lt;ol&gt; ট্যাগ ব্যবহার করলে কী পাওয়া যায়?", opts:["নম্বরযুক্ত লিস্ট","ডট লিস্ট","ছবি","শিরোনাম"], ans:0},
+  {q:"&lt;table&gt; ট্যাগের মূল কাজ কী?", opts:["ছবি দেখানো","টেক্সট স্ট্রাইক করা","টেবিল তৈরি করা","লিঙ্ক তৈরি করা"], ans:2},
+  {q:"&lt;tr&gt; ট্যাগ কোথায় ব্যবহৃত হয়?", opts:["টেবিলের কলামে","টেবিলের সারিতে","টেবিলের সীমানায়","টেবিলের শিরোনামে"], ans:1},
+  {q:"&lt;td&gt; ট্যাগ দিয়ে কী বোঝানো হয়?", opts:["টেবিল হেডার","টেবিল ডাটা সেল","টেবিল বর্ডার","টেবিল শিরোনাম"], ans:1},
+  {q:"&lt;th&gt; ট্যাগের কাজ কী?", opts:["টেবিলের হেডার সেল","টেবিলের বডি","টেবিলের ফুটার","টেবিলের সারি"], ans:0},
+  {q:"ডোমেইন নেম কী?", opts:["একটি IP address","ওয়েবসাইটের নাম যা মানুষ সহজে মনে রাখতে পারে","HTML ট্যাগ","ব্রাউজারের নাম"], ans:1},
+  {q:"IP Address কী বোঝায়?", opts:["ওয়েবসাইটের নাম","একটি ইউনিক নাম্বার যা কম্পিউটারকে চিহ্নিত করে","HTML কোড","ইন্টারনেট সার্ভিস"], ans:1},
+  {q:"IPv4 ঠিকানায় কয়টি অংশ থাকে?", opts:["২টি","৩টি","৪টি","৬টি"], ans:2},
+  {q:"URL এর পূর্ণরূপ কী?", opts:["Universal Routing Language","Uniform Resource Locator","Universal Reference Link","Uniform Router Language"], ans:1},
+  {q:"নিচের কোনটি URL এর অংশ নয়?", opts:["প্রোটোকল (http/https)","ডোমেইন নেম","আইপি ঠিকানা","কম্পাইলার"], ans:3},
+  {q:"&lt;p&gt; ট্যাগ কি একটি ব্লক-লেভেল এলিমেন্ট?", opts:["হ্যাঁ","না","কখনো কখনো","বলা যায় না"], ans:0},
+  {q:"&lt;b&gt; ট্যাগ কোন ট্যাগের বিকল্প হিসেবে আধুনিক HTML এ ব্যবহার করা হয়?", opts:["&lt;strong&gt;","&lt;em&gt;","&lt;i&gt;","&lt;mark&gt;"], ans:0},
+  {q:"&lt;del&gt; ট্যাগ সাধারণত কোন ওয়েবসাইটে বেশি দেখা যায়?", opts:["ব্লগ","ই-কমার্স (পণ্য পুরোনো দামের জন্য)","নিউজ ওয়েবসাইট","গেম সাইট"], ans:1},
+  {q:"&lt;sub&gt; ট্যাগ কোন ক্ষেত্রে বেশি ব্যবহৃত হয়?", opts:["রাসায়নিক সূত্র","গান","ছবি","ভিডিও"], ans:0},
+  {q:"&lt;sup&gt; ট্যাগ কোন ক্ষেত্রে বেশি ব্যবহৃত হয়?", opts:["গাণিতিক সূত্র","গান লিরিক","হেডিং","লিঙ্ক"], ans:0},
+  {q:"&lt;ul&gt; ট্যাগের ভেতরে কী ব্যবহার হয়?", opts:["&lt;tr&gt;","&lt;li&gt;","&lt;td&gt;","&lt;th&gt;"], ans:1},
+  {q:"&lt;ol&gt; ট্যাগে লিস্ট কিভাবে দেখানো হয়?", opts:["ডট দিয়ে","সংখ্যা বা অক্ষর দিয়ে","লাইন দিয়ে","ছবি দিয়ে"], ans:1},
+  {q:"ডোমেইন নাম এবং আইপি ঠিকানার মধ্যে সম্পর্ক কী?", opts:["ডোমেইন নাম হলো আইপি ঠিকানার মানুষের পড়ার উপযোগী রূপ","ডোমেইন নাম সবসময় আলাদা হয় আইপি থেকে","ডোমেইন নাম ব্রাউজারের অংশ","ডোমেইন নাম সার্ভারকে নির্দেশ করে না"], ans:0},
+  {q:"URL এর মাধ্যমে কী নির্ধারণ করা যায়?", opts:["ওয়েবসাইটের অবস্থান","কম্পিউটার হার্ডওয়্যার","প্রোগ্রামিং ল্যাঙ্গুয়েজ","নেটওয়ার্ক প্রিন্টার"], ans:0}
+];
+
+    const container = document.getElementById("questions");
+    quizData.forEach((item,idx)=>{
+      const div=document.createElement("div");
+      div.className="question";
+      div.innerHTML=`<h4>${idx+1}) ${item.q}</h4>`+
+        item.opts.map((opt,i)=>
+          `<label class="opt"><input type="radio" name="q${idx}" value="${i}"> ${String.fromCharCode(0x0995+i)}) ${opt}</label>`
+        ).join("");
+      container.appendChild(div);
+    });
+
+    document.getElementById("submitBtn").addEventListener("click",()=>{
+      let score=0;
+      const qs=document.querySelectorAll(".question");
+      qs.forEach((qdiv,qidx)=>{
+        const chosen=document.querySelector(`input[name="q${qidx}"]:checked`);
+        const labels=qdiv.querySelectorAll(".opt");
+        labels.forEach(l=>l.classList.remove("correct","incorrect"));
+        if(chosen){
+          const val=parseInt(chosen.value);
+          if(val===quizData[qidx].ans){
+            score++;
+            labels[val].classList.add("correct");
+          }else{
+            labels[val].classList.add("incorrect");
+            labels[quizData[qidx].ans].classList.add("correct");
+          }
+        }
+      });
+      document.getElementById("result").textContent=`🌟 আপনার স্কোর: ${score} / ${quizData.length}`;
+    });
+
+    document.getElementById("resetBtn").addEventListener("click",()=>{
+      document.getElementById("result").textContent="";
+      document.querySelectorAll(".opt").forEach(l=>l.classList.remove("correct","incorrect"));
+    });
+  }
+  </script>
+</body>
+</html>
