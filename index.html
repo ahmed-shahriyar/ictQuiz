@@ -1,205 +1,233 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chemistry - ২৫ প্রশ্ন</title>
-  <style>
-    body {
-      font-family: "Segoe UI", system-ui, sans-serif;
-      margin: 0; padding: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad390, #6a82fb, #fc5c7d);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-    }
-    @keyframes gradientBG {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    .card {
-      max-width: 960px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 18px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
-    h2 { text-align: center; color: #6a1b9a; }
-    .question {
-      margin: 18px 0;
-      padding: 16px;
-      border-radius: 12px;
-      border: 3px solid transparent;
-      background: white;
-      background-clip: padding-box;
-      position: relative;
-    }
-    .question:before {
-      content: "";
-      position: absolute;
-      top: -3px; left: -3px; right: -3px; bottom: -3px;
-      z-index: -1;
-      border-radius: 12px;
-      background: linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);
-      background-size: 300% 300%;
-      animation: borderAnim 5s linear infinite;
-    }
-    @keyframes borderAnim {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    .options { display: grid; gap: 8px; margin-top: 10px }
-    .opt {
-      padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      background: #fafafa;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex; align-items: center;
-    }
-    .opt input { margin-right: 10px; transform: scale(1.2); }
-    .opt:hover {
-      background: linear-gradient(90deg,#ff9a9e,#fad390,#6a82fb,#fc5c7d);
-      color: white;
-      border-color: transparent;
-    }
-    .correct { background: #c8f7c5 !important; border-color:#27ae60 !important; color:#065f46 }
-    .incorrect { background: #f7c5c5 !important; border-color:#e74c3c !important; color:#7f1d1d }
-    button {
-      padding: 12px 20px;
-      border-radius: 12px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(90deg,#fc5c7d,#6a82fb,#45f2b3);
-      background-size: 200% 200%;
-      color: white;
-      transition: 0.3s;
-      margin-top: 14px;
-      margin-right: 10px;
-    }
-    button:hover { background-position: right center; }
-    #result {
-      font-weight: 700; font-size: 20px; margin-top: 20px; text-align:center;
-      color:#111;
-    }
-    /* Mobile friendly */
-    @media(max-width:600px){
-      .card{padding:12px}
-      .opt{font-size:14px;padding:10px}
-      button{width:100%;margin-bottom:10px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Quiz – ২৫ প্রশ্ন</title>
+
+<style>
+body{
+  font-family:"Segoe UI",system-ui,sans-serif;
+  margin:0;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#6a82fb,#fc5c7d);
+  background-size:400% 400%;
+  animation:bg 12s infinite;
+}
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.card{
+  max-width:950px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+h2{text-align:center;color:#6a1b9a}
+
+#timer,#progressText{
+  text-align:center;
+  font-weight:700;
+  margin:6px 0;
+}
+
+#progressBar{
+  width:100%;
+  height:10px;
+  background:#eee;
+  border-radius:10px;
+  overflow:hidden;
+}
+#progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6a82fb,#fc5c7d);
+  transition:.3s;
+}
+
+.question{
+  margin:18px 0;
+  padding:16px;
+  border-radius:12px;
+  position:relative;
+  background:#fff;
+}
+.question::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:12px;
+  background:linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet);
+  z-index:-1;
+  animation:border 5s linear infinite;
+}
+@keyframes border{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
+.options{display:grid;gap:8px;margin-top:10px}
+.opt{
+  padding:12px;
+  border:2px solid #ddd;
+  border-radius:10px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  transition:.3s;
+}
+.opt:hover{
+  background:linear-gradient(90deg,#ff9a9e,#6a82fb);
+  color:#fff;
+}
+.opt input{margin-right:10px;transform:scale(1.2)}
+
+.correct{background:#c8f7c5!important;border-color:#27ae60!important}
+.incorrect{background:#f7c5c5!important;border-color:#e74c3c!important}
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(90deg,#fc5c7d,#6a82fb);
+  color:#fff;
+  margin:10px 5px;
+}
+
+#result{
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  margin-top:15px;
+}
+
+@media(max-width:600px){
+  button{width:100%}
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h2>🌈 HTML কুইজ (২৫ প্রশ্ন)</h2>
-    <form id="quizForm">
-      <div id="questions"></div>
-      <button type="button" id="submitBtn">✅ জমা দিন</button>
-      <button type="reset" id="resetBtn">🔄 রিসেট</button>
-    </form>
-    <p id="result"></p>
-  </div>
+<div class="card">
+  <h2>🌈 HTML কুইজ (২৫ প্রশ্ন)</h2>
 
-  <script>
-  window.onload = function() {
-  const quizData = [
-  {q:"ডোবেরাইনারের ত্রয়ী সূত্র কোন বৈশিষ্ট্যের উপর ভিত্তি করে?", opts:["পারমাণবিক সংখ্যা","পারমাণবিক ভর","যোজনী","ইলেকট্রন সংখ্যা"], ans:1},
+  <p id="timer">⏳ সময়: 10:00</p>
+  <p id="progressText">প্রশ্ন 0 / 25</p>
+  <div id="progressBar"><div id="progressFill"></div></div>
 
-  {q:"নিউল্যান্ডসের অষ্টক সূত্রে কয়টি মৌল পর পর একই ধর্ম প্রদর্শন করে?", opts:["৬টি","৭টি","৮টি","৯টি"], ans:2},
+  <form id="quizForm">
+    <div id="questions"></div>
+    <button type="button" id="submitBtn">✅ জমা দিন</button>
+    <button type="reset" id="resetBtn">🔄 রিসেট</button>
+  </form>
 
-  {q:"আধুনিক পর্যায় সারণিতে মৌলগুলো কোন ক্রমে সাজানো?", opts:["পারমাণবিক ভরের ক্রমে","যোজনীর ক্রমে","পারমাণবিক সংখ্যার ক্রমে","আয়তনের ক্রমে"], ans:2},
+  <p id="result"></p>
+</div>
 
-  {q:"s-ব্লকের মৌলগুলোর বহিঃস্থ কক্ষে সর্বাধিক কতটি ইলেকট্রন থাকতে পারে?", opts:["১","২","৬","৮"], ans:1},
+<script>
+window.onload=function(){
 
-  {q:"p-ব্লকের মৌলগুলো কোন গ্রুপে অবস্থিত?", opts:["গ্রুপ ১–২","গ্রুপ ৩–১২","গ্রুপ ১৩–১৮","গ্রুপ ১৭–১৮"], ans:2},
-
-  {q:"ল্যান্থানাইড সিরিজের মৌল সংখ্যা কতটি?", opts:["১০টি","১৪টি","১৫টি","১৮টি"], ans:2},
-
-  {q:"অ্যাক্টিনাইড সিরিজের মৌলগুলো সাধারণত কেমন প্রকৃতির?", opts:["অধাতু","অর্ধধাতু","তেজস্ক্রিয়","নিষ্ক্রিয়"], ans:2},
-
-  {q:"একই পর্যায়ে কোন ধর্মটি অপরিবর্তিত থাকে?", opts:["পারমাণবিক সংখ্যা","যোজনী","শক্তিস্তর সংখ্যা","পারমাণবিক ব্যাসার্ধ"], ans:2},
-
-  {q:"একই গ্রুপে মৌলগুলোর কোনটি অপরিবর্তিত থাকে?", opts:["শক্তিস্তর সংখ্যা","যোজনী","পারমাণবিক সংখ্যা","পারমাণবিক ভর"], ans:1},
-
-  {q:"পারমাণবিক সংখ্যা বৃদ্ধির সাথে নিউক্লিয়ার চার্জ কী হয়?", opts:["হ্রাস পায়","অপরিবর্তিত থাকে","বৃদ্ধি পায়","অনিয়মিত হয়"], ans:2},
-
-  {q:"ইলেকট্রন আসক্তি (Electron affinity) সাধারণত কোন দিকে বাড়ে?", opts:["গ্রুপে নিচে","পর্যায়ে বাম থেকে ডানে","পর্যায়ে ডান থেকে বামে","গ্রুপে উপরে"], ans:1},
-
-  {q:"সবচেয়ে কম ইলেকট্রন আসক্তি কোন শ্রেণির মৌলের?", opts:["হ্যালোজেন","ক্ষার ধাতু","নিষ্ক্রিয় গ্যাস","ক্ষারীয় মৃত্তিকা ধাতু"], ans:2},
-
-  {q:"নিচের কোন মৌলটি ক্ষারীয় মৃত্তিকা ধাতু?", opts:["Na","K","Mg","Al"], ans:2},
-
-  {q:"গ্রুপ–১৭ এর মৌলগুলো সাধারণত কোন আয়ন গঠন করে?", opts:["+1","-1","-2","+2"], ans:1},
-
-  {q:"গ্রুপ–১ এর মৌলগুলো পানির সাথে বিক্রিয়ায় কী উৎপন্ন করে?", opts:["অম্ল","ক্ষার","লবণ","অক্সাইড"], ans:1},
-
-  {q:"পর্যায় সারণিতে ধাতু থেকে অধাতু পরিবর্তন ঘটে কোন দিকে?", opts:["ডান থেকে বামে","উপর থেকে নিচে","বাম থেকে ডানে","মাঝখানে"], ans:2},
-
-  {q:"নিচের কোনটি অধাতু?", opts:["Al","Mg","S","Na"], ans:2},
-
-  {q:"পর্যায় সারণির মাঝখানে অবস্থিত মৌলগুলো কী নামে পরিচিত?", opts:["হ্যালোজেন","নিষ্ক্রিয় গ্যাস","স্থানান্তর মৌল","অধাতু"], ans:2},
-
-  {q:"পর্যায় সারণিতে মোট কয়টি ব্লক আছে?", opts:["২টি","৩টি","৪টি","৫টি"], ans:2},
-
-  {q:"f-ব্লকের মৌলগুলো সাধারণত কোথায় প্রদর্শিত হয়?", opts:["পর্যায় সারণির মাঝখানে","ডান পাশে","বাম পাশে","নিচে আলাদা করে"], ans:3},
-
-  {q:"পারমাণবিক ব্যাসার্ধ হ্রাসের প্রধান কারণ কী?", opts:["ইলেকট্রন সংখ্যা বৃদ্ধি","নিউক্লিয়ার চার্জ বৃদ্ধি","শক্তিস্তর বৃদ্ধি","প্রোটন হ্রাস"], ans:1},
-
-  {q:"কোন মৌলটি সহজে ইলেকট্রন ত্যাগ করে?", opts:["অধাতু","হ্যালোজেন","ক্ষার ধাতু","নিষ্ক্রিয় গ্যাস"], ans:2},
-
-  {q:"কোন মৌলগুলো সাধারণত রাসায়নিকভাবে সবচেয়ে কম সক্রিয়?", opts:["ক্ষার ধাতু","হ্যালোজেন","নিষ্ক্রিয় গ্যাস","অর্ধধাতু"], ans:2},
-
-  {q:"পর্যায় সারণিতে সবচেয়ে ছোট পরমাণু কোনটি?", opts:["H","He","Li","Be"], ans:1},
-
-  {q:"যোজনী নির্ধারণে কোন ইলেকট্রনগুলো গুরুত্বপূর্ণ?", opts:["অভ্যন্তরীণ ইলেকট্রন","নিউক্লিয়ার ইলেকট্রন","বহিঃস্থ ইলেকট্রন","সব ইলেকট্রন"], ans:2}
+let quizData=[
+{q:"ডোবেরাইনারের ত্রয়ী সূত্র কোন বৈশিষ্ট্যের উপর ভিত্তি করে?",opts:["পারমাণবিক সংখ্যা","পারমাণবিক ভর","যোজনী","ইলেকট্রন সংখ্যা"],ans:1},
+{q:"নিউল্যান্ডসের অষ্টক সূত্রে কয়টি মৌল পর পর একই ধর্ম দেখায়?",opts:["৬টি","৭টি","৮টি","৯টি"],ans:2},
+{q:"আধুনিক পর্যায় সারণি সাজানো হয় কোন ক্রমে?",opts:["পারমাণবিক ভর","যোজনী","পারমাণবিক সংখ্যা","আয়তন"],ans:2},
+{q:"s-ব্লকের মৌলের বহিঃস্থ কক্ষে কত ইলেকট্রন?",opts:["১","২","৬","৮"],ans:1},
+{q:"p-ব্লকের মৌল কোন গ্রুপে?",opts:["১–২","৩–১২","১৩–১৮","১৭–১৮"],ans:2},
+{q:"ল্যান্থানাইড মৌল সংখ্যা কত?",opts:["১০","১৪","১৫","১৮"],ans:2},
+{q:"অ্যাক্টিনাইড মৌল সাধারণত কী?",opts:["অধাতু","অর্ধধাতু","তেজস্ক্রিয়","নিষ্ক্রিয়"],ans:2},
+{q:"একই পর্যায়ে কোনটি অপরিবর্তিত?",opts:["পারমাণবিক সংখ্যা","যোজনী","শক্তিস্তর","ব্যাসার্ধ"],ans:2},
+{q:"একই গ্রুপে কোনটি অপরিবর্তিত?",opts:["শক্তিস্তর","যোজনী","পারমাণবিক সংখ্যা","ভর"],ans:1},
+{q:"নিউক্লিয়ার চার্জ বাড়লে কী হয়?",opts:["কমে","একই থাকে","বাড়ে","অনিয়মিত"],ans:2},
+{q:"ইলেকট্রন আসক্তি বাড়ে কোন দিকে?",opts:["গ্রুপে নিচে","বাম থেকে ডানে","ডান থেকে বামে","গ্রুপে উপরে"],ans:1},
+{q:"সবচেয়ে কম ইলেকট্রন আসক্তি কার?",opts:["হ্যালোজেন","ক্ষার ধাতু","নিষ্ক্রিয় গ্যাস","ক্ষারীয়"],ans:2},
+{q:"ক্ষারীয় মৃত্তিকা ধাতু কোনটি?",opts:["Na","K","Mg","Al"],ans:2},
+{q:"গ্রুপ ১৭ কোন আয়ন গঠন করে?",opts:["+1","-1","-2","+2"],ans:1},
+{q:"গ্রুপ ১ পানির সাথে কী তৈরি করে?",opts:["অম্ল","ক্ষার","লবণ","অক্সাইড"],ans:1},
+{q:"ধাতু → অধাতু কোন দিকে?",opts:["ডানে","উপরে","বামে","নিচে"],ans:0},
+{q:"অধাতু কোনটি?",opts:["Al","Mg","S","Na"],ans:2},
+{q:"মাঝের মৌলগুলো কী?",opts:["হ্যালোজেন","নিষ্ক্রিয়","স্থানান্তর","অধাতু"],ans:2},
+{q:"পর্যায় সারণিতে ব্লক সংখ্যা?",opts:["২","৩","৪","৫"],ans:2},
+{q:"f-ব্লক কোথায়?",opts:["মাঝে","ডানে","বামে","নিচে"],ans:3},
+{q:"পারমাণবিক ব্যাসার্ধ কমার কারণ?",opts:["ইলেকট্রন","নিউক্লিয়ার চার্জ","শক্তিস্তর","প্রোটন কমা"],ans:1},
+{q:"সহজে ইলেকট্রন ত্যাগ করে?",opts:["অধাতু","হ্যালোজেন","ক্ষার ধাতু","নিষ্ক্রিয়"],ans:2},
+{q:"সবচেয়ে কম সক্রিয় মৌল?",opts:["ক্ষার","হ্যালোজেন","নিষ্ক্রিয়","অর্ধধাতু"],ans:2},
+{q:"সবচেয়ে ছোট পরমাণু?",opts:["H","He","Li","Be"],ans:1},
+{q:"যোজনী নির্ধারণ করে কোন ইলেকট্রন?",opts:["ভিতরের","নিউক্লিয়ার","বহিঃস্থ","সব"],ans:2}
 ];
 
+// shuffle
+quizData.sort(()=>Math.random()-0.5);
 
+const qBox=document.getElementById("questions");
+const progressText=document.getElementById("progressText");
+const progressFill=document.getElementById("progressFill");
 
-    const container = document.getElementById("questions");
-    quizData.forEach((item,idx)=>{
-      const div=document.createElement("div");
-      div.className="question";
-      div.innerHTML=`<h4>${idx+1}) ${item.q}</h4>`+
-        item.opts.map((opt,i)=>
-          `<label class="opt"><input type="radio" name="q${idx}" value="${i}"> ${String.fromCharCode(0x0995+i)}) ${opt}</label>`
-        ).join("");
-      container.appendChild(div);
-    });
+quizData.forEach((d,i)=>{
+  const div=document.createElement("div");
+  div.className="question";
+  div.innerHTML=`<h4>${i+1}) ${d.q}</h4>`+
+  d.opts.map((o,j)=>
+    `<label class="opt">
+      <input type="radio" name="q${i}" value="${j}">
+      ${String.fromCharCode(0x0995+j)}) ${o}
+    </label>`
+  ).join("");
+  qBox.appendChild(div);
+});
 
-    document.getElementById("submitBtn").addEventListener("click",()=>{
-      let score=0;
-      const qs=document.querySelectorAll(".question");
-      qs.forEach((qdiv,qidx)=>{
-        const chosen=document.querySelector(`input[name="q${qidx}"]:checked`);
-        const labels=qdiv.querySelectorAll(".opt");
-        labels.forEach(l=>l.classList.remove("correct","incorrect"));
-        if(chosen){
-          const val=parseInt(chosen.value);
-          if(val===quizData[qidx].ans){
-            score++;
-            labels[val].classList.add("correct");
-          }else{
-            labels[val].classList.add("incorrect");
-            labels[quizData[qidx].ans].classList.add("correct");
-          }
-        }
-      });
-      document.getElementById("result").textContent=`🌟 আপনার স্কোর: ${score} / ${quizData.length}`;
-    });
+document.addEventListener("change",()=>{
+  const done=document.querySelectorAll("input:checked").length;
+  progressText.textContent=`প্রশ্ন ${done} / ${quizData.length}`;
+  progressFill.style.width=(done/quizData.length)*100+"%";
+});
 
-    document.getElementById("resetBtn").addEventListener("click",()=>{
-      document.getElementById("result").textContent="";
-      document.querySelectorAll(".opt").forEach(l=>l.classList.remove("correct","incorrect"));
-    });
+// Timer
+let time=600;
+const timerEl=document.getElementById("timer");
+const t=setInterval(()=>{
+  let m=Math.floor(time/60), s=time%60;
+  timerEl.textContent=`⏳ সময়: ${m}:${s.toString().padStart(2,'0')}`;
+  time--;
+  if(time<0){clearInterval(t);submit();}
+},1000);
+
+document.getElementById("submitBtn").onclick=submit;
+
+function submit(){
+  const answered=document.querySelectorAll("input:checked").length;
+  if(answered<quizData.length){
+    alert("সব প্রশ্নের উত্তর দিন");
+    return;
   }
-  </script>
+  let score=0;
+  document.querySelectorAll(".question").forEach((q,i)=>{
+    const ch=q.querySelector("input:checked");
+    const ops=q.querySelectorAll(".opt");
+    ops.forEach(o=>o.classList.remove("correct","incorrect"));
+    if(parseInt(ch.value)===quizData[i].ans){
+      score++; ops[ch.value].classList.add("correct");
+    }else{
+      ops[ch.value].classList.add("incorrect");
+      ops[quizData[i].ans].classList.add("correct");
+    }
+  });
+
+  document.querySelectorAll("input").forEach(i=>i.disabled=true);
+
+  let grade=score>=22?"🔥 অসাধারণ":score>=17?"👍 ভালো":score>=12?"🙂 মোটামুটি":"⚠️ আরও অনুশীলন দরকার";
+  document.getElementById("result").innerHTML=`🌟 স্কোর: ${score}/25<br>${grade}`;
+}
+
+document.getElementById("resetBtn").onclick=()=>{
+  location.reload();
+};
+
+}
+</script>
 </body>
 </html>
